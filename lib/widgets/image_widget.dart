@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+class ImageWidget extends StatelessWidget {
+  const ImageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: double.infinity,
+      height: size.height * 0.2,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Image.network(
+          width: double.infinity,
+          'https://picsum.photos/250?image=9',
+          fit: BoxFit.contain,
+        ),
+      ),
+
+    );
+  }
+}
