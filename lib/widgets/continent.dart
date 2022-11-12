@@ -38,15 +38,16 @@ class _ContinentState extends State<Continent> {
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeModel>();
     return Container(
-      color: Color(0xff757575),
+    //  color: Color(0xff757575),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 25),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
+
           ),
-          color: Colors.white,
+       //   color: Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +90,7 @@ class _ContinentState extends State<Continent> {
                     children: [
                       Text(
                         continent,
-                        style: Styles.fadedmodalTextStyle,
+                       // style: Styles.fadedmodalTextStyle,
                       ),
                       InkWell(
                         onTap: () {
@@ -103,9 +104,8 @@ class _ContinentState extends State<Continent> {
 
                           });
                         },
-                        child: Icon(selectedContinents.contains(continent)?  Icons.check_box : Icons.check_box_outline_blank_outlined,
-                        color: themeProvider.isDark ? Colors.white
-                          : Colors.black,)
+                        child: Icon(selectedContinents.contains(continent) ?  Icons.check_box_outlined : Icons.check_box_outline_blank_rounded, color:
+                          themeProvider.isDark ? Colors.white : Colors.black,),
 
                       ),
                     ],

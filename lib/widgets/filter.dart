@@ -9,7 +9,7 @@ class Filter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff757575),
+     // color: Color(0xff757575),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.30,
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 25),
@@ -18,7 +18,7 @@ class Filter extends StatelessWidget {
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-          color: Colors.white,
+         // color: Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

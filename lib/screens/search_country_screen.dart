@@ -22,6 +22,12 @@ class SearchCountry extends StatefulWidget {
 class _SearchCountryState extends State<SearchCountry> {
   final TextEditingController searchEditingController = TextEditingController();
 
+  @override
+  void dispose() {
+    super.dispose();
+    searchEditingController.dispose();
+  }
+
   List<CountryModel> countryList = [];
 
   dynamic countries;
@@ -38,6 +44,7 @@ class _SearchCountryState extends State<SearchCountry> {
   Future<void> fetchCountries() async {
     countries = await ApiHandler.getCountries();
     sortedCountries = countries;
+    sortedCountries.sort((a,b) => a['name']['common'].toString().compareTo(b['name']['common'].toString()));
     // sortedCountries.sort((a, b) => a.toString().compareTo(b.toString()));
     // sortedCountries.sort((a, b) {
     //   return a['name']['common'].toLowerCase().compareTo(b['name']['common'].toLowerCase());
@@ -84,13 +91,20 @@ class _SearchCountryState extends State<SearchCountry> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset('assets/images/explore.png'),
-                      SwitcherButton(
-                        value: themeNotifier.isDark ? true : false,
-                        onChange: (value) {
-                          themeNotifier.isDark
-                              ? themeNotifier.isDark = false
-                              : themeNotifier.isDark = true;
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('switch mode'),
+                          SizedBox(width: 3),
+                          SwitcherButton(
+                            value: themeNotifier.isDark ? true : false,
+                            onChange: (value) {
+                              themeNotifier.isDark
+                                  ? themeNotifier.isDark = false
+                                  : themeNotifier.isDark = true;
+                            },
+                          ),
+                        ],
                       ),
                      // Image.asset('assets/images/mode.png'),
                       //  Icon(Icons.brightness_high),
