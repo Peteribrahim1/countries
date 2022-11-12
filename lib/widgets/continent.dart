@@ -2,8 +2,35 @@ import 'package:flutter/material.dart';
 
 import '../styles/styles.dart';
 
-class Continent extends StatelessWidget {
+class Continent extends StatefulWidget {
   const Continent({Key? key}) : super(key: key);
+
+  @override
+  State<Continent> createState() => _ContinentState();
+}
+
+class _ContinentState extends State<Continent> {
+  bool checkBoxValue = false;
+
+  List<String> continents = [
+    'Africa',
+    'Antarctica',
+    'Asia',
+    'Australia',
+    'Europe',
+    'North America',
+    'South America',
+  ];
+
+  List<String> selectedContinents = [];
+
+  void handlecheckbox(bool? value) {
+    if (value != null) {
+      setState(() {
+        checkBoxValue = value;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +67,48 @@ class Continent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Continent',
+                  'Continents',
                   style: Styles.smallHeadingTextStyle,
                 ),
                 Icon(Icons.expand_less),
               ],
             ),
-            SizedBox(height: 64),
+            SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: continents.length,
+                itemBuilder: (context, index) {
+                  final continent = continents[index];
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        continent,
+                        style: Styles.fadedmodalTextStyle,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          if(selectedContinents.contains(continent)){
+                            selectedContinents.remove(continent);
+                          }else{
+                            selectedContinents.add(continent);
+                          }
+                          print("Selected continents length ${selectedContinents.length}");
+                          setState(() {
+
+                          });
+                        },
+                        child: Icon(selectedContinents.contains(continent)?  Icons.check_box : Icons.check_box_outline_blank_outlined)
+
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -81,7 +143,9 @@ class Continent extends StatelessWidget {
                   width: 200,
                   height: 48,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context, selectedContinents);
+                    },
                     child: Text(
                       'Show results',
                       style: Styles.butonTextStyle,

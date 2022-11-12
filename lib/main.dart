@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (ctx) => SearchCountry(),
-          CountryDetails.routeName: (ctx) => CountryDetails(),
+         // CountryDetails.routeName: (ctx) => CountryDetails(),
         }
     );
   }

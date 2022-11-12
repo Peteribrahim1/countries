@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Styles {
-
   static final leadingTextStyle = TextStyle(
-  //  fontFamily: 'SofiaPro',
+    //  fontFamily: 'SofiaPro',
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: Color.fromRGBO(28, 25, 23, 1),
@@ -17,7 +16,7 @@ class Styles {
   );
 
   static final preTextStyle = TextStyle(
-  //  fontFamily: 'SofiaPro',
+    //  fontFamily: 'SofiaPro',
     color: Color.fromRGBO(28, 25, 23, 1),
     fontSize: 16,
     fontWeight: FontWeight.w500,
@@ -31,7 +30,7 @@ class Styles {
   );
 
   static final titleTextStyle = TextStyle(
-  //  fontFamily: 'SofiaPro',
+    //  fontFamily: 'SofiaPro',
     fontSize: 20,
     fontWeight: FontWeight.w700,
     color: Color.fromRGBO(28, 25, 23, 1),
@@ -49,6 +48,13 @@ class Styles {
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: Color.fromRGBO(28, 25, 23, 1),
+  );
+
+  static final fadedmodalTextStyle = TextStyle(
+    //  fontFamily: 'SofiaPro',
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: Color.fromRGBO(102, 112, 133, 1),
   );
 
   static final butonTextStyle = TextStyle(
@@ -76,15 +82,13 @@ class Styles {
     backgroundColor: Color.fromRGBO(255, 108, 0, 1),
   );
 
-
-
-  // static final splashStyle = TextStyle(
-  //   fontFamily: 'SofiaPro',
-  //   fontSize: 40,
-  //   fontWeight: FontWeight.w700,
-  //   color: Color.fromRGBO(28, 107, 164, 1),
-  //   // color: Color.fromRGBO(0, 0, 51, 1),
-  // );
+// static final splashStyle = TextStyle(
+//   fontFamily: 'SofiaPro',
+//   fontSize: 40,
+//   fontWeight: FontWeight.w700,
+//   color: Color.fromRGBO(28, 107, 164, 1),
+//   // color: Color.fromRGBO(0, 0, 51, 1),
+// );
 
 //  static final appbarColor = Color.fromRGBO(0, 0, 51, 1);
 

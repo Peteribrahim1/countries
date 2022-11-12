@@ -1,4 +1,8 @@
+import 'package:countries/api/api_handler.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../models/countries_model.dart';
+import '../models/country_model.dart';
 
 import '../widgets/country_widget.dart';
 import '../widgets/filter.dart';
@@ -14,6 +18,54 @@ class SearchCountry extends StatefulWidget {
 
 class _SearchCountryState extends State<SearchCountry> {
   final TextEditingController searchEditingController = TextEditingController();
+
+  List<CountryModel> countryList = [];
+
+  dynamic countries;
+  dynamic sortedCountries;
+
+  bool loading = true;
+
+  @override
+  void didChangeDependencies() {
+    // fetchCountries();
+    super.didChangeDependencies();
+  }
+
+  Future<void> fetchCountries () async {
+    countries = await ApiHandler.getCountries();
+    sortedCountries = countries;
+   // sortedCountries.sort((a, b) => a.toString().compareTo(b.toString()));
+    // sortedCountries.sort((a, b) {
+    //   return a['name']['common'].toLowerCase().compareTo(b['name']['common'].toLowerCase());
+    // });
+    setState(() {
+      loading = false;
+    });
+
+
+  }
+
+  Future<void> sortedCountriesList (List<String> regions) async {
+    print("Continents selected ${regions.length}");
+    for(int i = 0; i < regions.length; i++) {
+
+      sortedCountries = countries.where((country) => country['region'] == regions[i]).toList();
+      print('sortedcountries $sortedCountries');
+    }
+
+    print('Sorted countries $sortedCountries');
+    setState(() {
+      loading = false;
+    });
+
+
+  }
+  @override
+  void initState() {
+    fetchCountries();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +91,25 @@ class _SearchCountryState extends State<SearchCountry> {
                 controller: searchEditingController,
                 textAlign: TextAlign.center,
                 maxLines: 1,
+                onChanged: (value){
+                  if(value.isEmpty){
+                    setState(() {
+                      sortedCountries = countries;
+                    });
+                  }else{
+                    final nan = "smart";
+
+                      sortedCountries = countries.where((country) => country['name']['common'].toString().toLowerCase().contains(value.toString().toLowerCase())).toList();
+                      print('sortedcountries $sortedCountries');
+
+
+
+
+                  }
+                  setState(() {
+
+                  });
+                },
                 decoration: InputDecoration(
                   filled: true,
                   counterText: "",
@@ -52,6 +123,7 @@ class _SearchCountryState extends State<SearchCountry> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
+
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(
@@ -61,6 +133,7 @@ class _SearchCountryState extends State<SearchCountry> {
                     color: Color.fromRGBO(102, 112, 133, 1),
                     fontSize: 16,
                   ),
+
                 ),
               ),
               SizedBox(height: 16),
@@ -69,11 +142,17 @@ class _SearchCountryState extends State<SearchCountry> {
                 children: [
                   Image.asset('assets/images/english.png'),
                   InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
+                    onTap: () async{
+                     List<String> regions = await showModalBottomSheet(
                         context: context,
                         builder: (context) => Filter(),
                       );
+
+                      if (regions.isEmpty) {
+
+                      } else {
+                        sortedCountriesList(regions);
+                      }
                     },
                     child: Image.asset('assets/images/filter.png'),
                   ),
@@ -82,11 +161,12 @@ class _SearchCountryState extends State<SearchCountry> {
               SizedBox(height: 47),
               SizedBox(
                 height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
+                child: loading ? const CupertinoActivityIndicator() : ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 20,
+                  itemCount: sortedCountries.length,
                   itemBuilder: (context, index) {
-                    return CountryWidget();
+                    final country = sortedCountries[index];
+                    return CountryWidget(country: country,);
                   },
                 ),
               ),

@@ -11,7 +11,7 @@ class Filter extends StatelessWidget {
     return Container(
       color: Color(0xff757575),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.30,
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 25),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -36,11 +36,13 @@ class Filter extends StatelessWidget {
             ),
             SizedBox(height: 24),
             InkWell(
-              onTap: () {
-                showModalBottomSheet(
+              onTap: () async{
+                List<String> regions = await showModalBottomSheet(
                   context: context,
                   builder: (context) => Continent(),
                 );
+
+                Navigator.pop(context, regions);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +62,7 @@ class Filter extends StatelessWidget {
             ),
             SizedBox(
               height: 24,
-            )
+            ),
           ],
         ),
       ),

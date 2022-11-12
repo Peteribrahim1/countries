@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  const ImageWidget({Key? key}) : super(key: key);
+  final String country;
+  const ImageWidget({Key? key, required this.country}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ImageWidget extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: Image.network(
           width: double.infinity,
-          'https://picsum.photos/250?image=9',
+          country,
           fit: BoxFit.contain,
         ),
       ),
