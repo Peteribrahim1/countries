@@ -32,3 +32,5 @@ After launching the app the first screen that comes up is the screen that displa
    
 ## LINK TO THE APK UPLOADED ON GOOGLEDRIVE
    
+
+## LINK TO THE APP ON APPETIZE.IO
