@@ -16,7 +16,9 @@ class CountryWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CountryDetails(country: country,),
+            builder: (context) => CountryDetails(
+              country: country,
+            ),
           ),
         );
       },
@@ -33,7 +35,7 @@ class CountryWidget extends StatelessWidget {
         style: Styles.leadingTextStyle,
       ),
       subtitle: Text(
-        '${country['capital'].toString().replaceAll('[', '')}',
+        '${country['capital'].toString().replaceAll('[', '').replaceAll(']', '')}',
         style: Styles.subtitleTextStyle,
       ),
     );

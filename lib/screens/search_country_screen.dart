@@ -1,8 +1,11 @@
 import 'package:countries/api/api_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:switcher_button/switcher_button.dart';
 import '../models/countries_model.dart';
 import '../models/country_model.dart';
+import 'package:countries/widgets/themeModel.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/country_widget.dart';
 import '../widgets/filter.dart';
@@ -32,25 +35,24 @@ class _SearchCountryState extends State<SearchCountry> {
     super.didChangeDependencies();
   }
 
-  Future<void> fetchCountries () async {
+  Future<void> fetchCountries() async {
     countries = await ApiHandler.getCountries();
     sortedCountries = countries;
-   // sortedCountries.sort((a, b) => a.toString().compareTo(b.toString()));
+    // sortedCountries.sort((a, b) => a.toString().compareTo(b.toString()));
     // sortedCountries.sort((a, b) {
     //   return a['name']['common'].toLowerCase().compareTo(b['name']['common'].toLowerCase());
     // });
     setState(() {
       loading = false;
     });
-
-
   }
 
-  Future<void> sortedCountriesList (List<String> regions) async {
+  Future<void> sortedCountriesList(List<String> regions) async {
     print("Continents selected ${regions.length}");
-    for(int i = 0; i < regions.length; i++) {
-
-      sortedCountries = countries.where((country) => country['region'] == regions[i]).toList();
+    for (int i = 0; i < regions.length; i++) {
+      sortedCountries = countries
+          .where((country) => country['region'] == regions[i])
+          .toList();
       print('sortedcountries $sortedCountries');
     }
 
@@ -58,9 +60,8 @@ class _SearchCountryState extends State<SearchCountry> {
     setState(() {
       loading = false;
     });
-
-
   }
+
   @override
   void initState() {
     fetchCountries();
@@ -69,111 +70,122 @@ class _SearchCountryState extends State<SearchCountry> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset('assets/images/explore.png'),
-                  //  Text('Explore'),
-                  Image.asset('assets/images/mode.png'),
-                  //  Icon(Icons.brightness_high),
-                ],
-              ),
-              SizedBox(height: 24),
-              TextField(
-                controller: searchEditingController,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                onChanged: (value){
-                  if(value.isEmpty){
-                    setState(() {
-                      sortedCountries = countries;
-                    });
-                  }else{
-                    final nan = "smart";
-
-                      sortedCountries = countries.where((country) => country['name']['common'].toString().toLowerCase().contains(value.toString().toLowerCase())).toList();
-                      print('sortedcountries $sortedCountries');
-
-
-
-
-                  }
-                  setState(() {
-
-                  });
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  counterText: "",
-                  fillColor: Color.fromRGBO(242, 244, 247, 1),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Color.fromRGBO(102, 112, 133, 1),
+    return Consumer(
+      builder: (context, ThemeModel themeNotifier, child) {
+        return Scaffold(
+       //   backgroundColor: Colors.white,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('assets/images/explore.png'),
+                      SwitcherButton(
+                        value: themeNotifier.isDark ? true : false,
+                        onChange: (value) {
+                          themeNotifier.isDark
+                              ? themeNotifier.isDark = false
+                              : themeNotifier.isDark = true;
+                        },
+                      ),
+                     // Image.asset('assets/images/mode.png'),
+                      //  Icon(Icons.brightness_high),
+                    ],
                   ),
-                  contentPadding: EdgeInsets.all(18),
-                  hintText: 'Search Country',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                        color: Color.fromRGBO(242, 244, 247, 1), width: 1),
-                  ),
-                  hintStyle: TextStyle(
-                    color: Color.fromRGBO(102, 112, 133, 1),
-                    fontSize: 16,
-                  ),
-
-                ),
-              ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset('assets/images/english.png'),
-                  InkWell(
-                    onTap: () async{
-                     List<String> regions = await showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Filter(),
-                      );
-
-                      if (regions.isEmpty) {
-
+                  SizedBox(height: 24),
+                  TextField(
+                    controller: searchEditingController,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        setState(() {
+                          sortedCountries = countries;
+                        });
                       } else {
-                        sortedCountriesList(regions);
+                        final nan = "smart";
+
+                        sortedCountries = countries
+                            .where((country) => country['name']['common']
+                                .toString()
+                                .toLowerCase()
+                                .contains(value.toString().toLowerCase()))
+                            .toList();
+                        print('sortedcountries $sortedCountries');
                       }
+                      setState(() {});
                     },
-                    child: Image.asset('assets/images/filter.png'),
+                    decoration: InputDecoration(
+                      filled: true,
+                      counterText: "",
+                      fillColor: Color.fromRGBO(242, 244, 247, 1),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Color.fromRGBO(102, 112, 133, 1),
+                      ),
+                      contentPadding: EdgeInsets.all(18),
+                      hintText: 'Search Country',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(242, 244, 247, 1), width: 1),
+                      ),
+                      hintStyle: TextStyle(
+                        color: Color.fromRGBO(102, 112, 133, 1),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('assets/images/english.png'),
+                      InkWell(
+                        onTap: () async {
+                          List<String> regions = await showModalBottomSheet(
+                            context: context,
+                            builder: (context) => Filter(),
+                          );
+
+                          if (regions.isEmpty) {
+                          } else {
+                            sortedCountriesList(regions);
+                          }
+                        },
+                        child: Image.asset('assets/images/filter.png'),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 47),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: loading
+                        ? const CupertinoActivityIndicator()
+                        : ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: sortedCountries.length,
+                            itemBuilder: (context, index) {
+                              final country = sortedCountries[index];
+                              return CountryWidget(
+                                country: country,
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),
-              SizedBox(height: 47),
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: loading ? const CupertinoActivityIndicator() : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: sortedCountries.length,
-                  itemBuilder: (context, index) {
-                    final country = sortedCountries[index];
-                    return CountryWidget(country: country,);
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

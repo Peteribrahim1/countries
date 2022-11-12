@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  switcher_button: ^0.0.4
   flutter:
     sdk: flutter
 
@@ -38,7 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   card_swiper: ^2.0.4
   page_transition: ^2.0.9
-  provider: ^6.0.4
+  provider:
+  shared_preferences:
   http: ^0.13.5
 
 dev_dependencies:

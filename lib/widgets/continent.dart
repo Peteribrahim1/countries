@@ -1,4 +1,6 @@
+import 'package:countries/widgets/themeModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../styles/styles.dart';
 
@@ -34,6 +36,7 @@ class _ContinentState extends State<Continent> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeModel>();
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -100,7 +103,9 @@ class _ContinentState extends State<Continent> {
 
                           });
                         },
-                        child: Icon(selectedContinents.contains(continent)?  Icons.check_box : Icons.check_box_outline_blank_outlined)
+                        child: Icon(selectedContinents.contains(continent)?  Icons.check_box : Icons.check_box_outline_blank_outlined,
+                        color: themeProvider.isDark ? Colors.white
+                          : Colors.black,)
 
                       ),
                     ],

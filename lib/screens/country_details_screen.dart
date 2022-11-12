@@ -107,40 +107,36 @@ class _CountryDetailsState extends State<CountryDetails> {
                 ),
               ],
             ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Motto:', style: Styles.preTextStyle,),
-                SizedBox(width: 8),
-                Text('${widget.country['motto']}', style: Styles.postTextStyle,),
-              ],
-            ),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Official language:', style: Styles.preTextStyle,),
+                Text(
+                  'Official language:',
+                  style: Styles.preTextStyle,
+                ),
                 SizedBox(width: 8),
-                Text('${widget.country['languages'].toString().replaceAll('{', '').replaceAll('}', '')}', style: Styles.postTextStyle,),
+                Expanded(
+                    child: Text(
+                  '${widget.country['languages'].toString().replaceAll('{', '').replaceAll('}', '')}',
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.postTextStyle,
+                )),
               ],
             ),
             SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Ethic group:', style: Styles.preTextStyle),
+                Text('Ethic group:',
+                    style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['languages']}', style: Styles.postTextStyle),
-              ],
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Religion:', style: Styles.preTextStyle),
-                SizedBox(width: 8),
-                Text('Christianity', style: Styles.postTextStyle),
+                Expanded(
+                  child: Text(
+                      '${widget.country['languages'].toString().replaceAll('{', '').replaceAll('}', '')}',
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.postTextStyle),
+                ),
               ],
             ),
             SizedBox(height: 4),
@@ -158,7 +154,8 @@ class _CountryDetailsState extends State<CountryDetails> {
               children: [
                 Text('Independence:', style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['independent']}', style: Styles.postTextStyle),
+                Text('${widget.country['independent']}',
+                    style: Styles.postTextStyle),
               ],
             ),
             SizedBox(height: 4),
@@ -167,16 +164,8 @@ class _CountryDetailsState extends State<CountryDetails> {
               children: [
                 Text('Area:', style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['area']} km2', style: Styles.postTextStyle),
-              ],
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(child: Text('Currency:', style: Styles.preTextStyle)),
-                SizedBox(width: 8),
-                Text('${widget.country['currencies']}', style: Styles.postTextStyle),
+                Text('${widget.country['area']} km2',
+                    style: Styles.postTextStyle),
               ],
             ),
             SizedBox(height: 4),
@@ -194,7 +183,12 @@ class _CountryDetailsState extends State<CountryDetails> {
               children: [
                 Text('Time zone:', style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['timezones']}', style: Styles.postTextStyle),
+                Expanded(
+                  child: Text(
+                      '${widget.country['timezones'].toString().replaceAll('[', '').replaceAll(']', '')}',
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.postTextStyle),
+                ),
               ],
             ),
             SizedBox(height: 4),
@@ -212,7 +206,8 @@ class _CountryDetailsState extends State<CountryDetails> {
               children: [
                 Text('Dialling code:', style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['idd']['root']}', style: Styles.postTextStyle),
+                Text('${widget.country['idd']['root']}',
+                    style: Styles.postTextStyle),
               ],
             ),
             SizedBox(height: 4),
@@ -221,7 +216,8 @@ class _CountryDetailsState extends State<CountryDetails> {
               children: [
                 Text('Driving side:', style: Styles.preTextStyle),
                 SizedBox(width: 8),
-                Text('${widget.country['car']['side']}', style: Styles.postTextStyle),
+                Text('${widget.country['car']['side']}',
+                    style: Styles.postTextStyle),
               ],
             ),
             SizedBox(height: 30),
