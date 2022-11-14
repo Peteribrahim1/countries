@@ -31,6 +31,7 @@ After launching the app the first screen that comes up is the screen that displa
    Automatic language detector.   
    
 ## LINK TO THE APK UPLOADED ON GOOGLEDRIVE
+   https://drive.google.com/file/d/1YqbxMyARpofeHo7J2vAb384QGIYIesvt/view?usp=share_link
    
-
 ## LINK TO THE APP ON APPETIZE.IO
+   https://appetize.io/app/ijxqeau7iwvjbe55qgyhcsrfka?device=pixel4&osVersion=11.0&scale=75
