@@ -140,7 +140,7 @@ class _SearchCountryState extends State<SearchCountry> {
                           sortedCountries = countries;
                         });
                       } else {
-                        final nan = "smart";
+                        final nan = "smat";
 
                         sortedCountries = countries
                             .where((country) => country['name']['common']
