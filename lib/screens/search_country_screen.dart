@@ -1,9 +1,14 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:countries/api/api_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:switcher_button/switcher_button.dart';
 import '../models/countries_model.dart';
-import '../models/country_model.dart';
+
+//import '../models/country_model.dart';
 import 'package:countries/widgets/themeModel.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +27,35 @@ class SearchCountry extends StatefulWidget {
 class _SearchCountryState extends State<SearchCountry> {
   final TextEditingController searchEditingController = TextEditingController();
 
+  late StreamSubscription subscription;
+  var isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  var _icon = Icons.wb_sunny;
+
+  @override
+  void initState() {
+    getConnectivity();
+    fetchCountries();
+    super.initState();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
+
   @override
   void dispose() {
     super.dispose();
     searchEditingController.dispose();
+    subscription.cancel();
   }
 
   List<CountryModel> countryList = [];
@@ -35,20 +65,12 @@ class _SearchCountryState extends State<SearchCountry> {
 
   bool loading = true;
 
-  @override
-  void didChangeDependencies() {
-    // fetchCountries();
-    super.didChangeDependencies();
-  }
-
   Future<void> fetchCountries() async {
     countries = await ApiHandler.getCountries();
     sortedCountries = countries;
-    sortedCountries.sort((a,b) => a['name']['common'].toString().compareTo(b['name']['common'].toString()));
-    // sortedCountries.sort((a, b) => a.toString().compareTo(b.toString()));
-    // sortedCountries.sort((a, b) {
-    //   return a['name']['common'].toLowerCase().compareTo(b['name']['common'].toLowerCase());
-    // });
+    sortedCountries.sort((a, b) => a['name']['common']
+        .toString()
+        .compareTo(b['name']['common'].toString()));
     setState(() {
       loading = false;
     });
@@ -70,17 +92,11 @@ class _SearchCountryState extends State<SearchCountry> {
   }
 
   @override
-  void initState() {
-    fetchCountries();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
-       //   backgroundColor: Colors.white,
+          //   backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(25),
@@ -91,22 +107,25 @@ class _SearchCountryState extends State<SearchCountry> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset('assets/images/explore.png'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('switch mode'),
-                          SizedBox(width: 3),
-                          SwitcherButton(
-                            value: themeNotifier.isDark ? true : false,
-                            onChange: (value) {
-                              themeNotifier.isDark
-                                  ? themeNotifier.isDark = false
-                                  : themeNotifier.isDark = true;
-                            },
-                          ),
-                        ],
+                      IconButton(
+                        icon: Icon(
+                          _icon,
+                          color: Colors.grey,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (_icon == Icons.wb_sunny) {
+                              _icon = Icons.brightness_2;
+                              themeNotifier.isDark = true;
+                            } else {
+                              _icon = Icons.wb_sunny;
+                              themeNotifier.isDark = false;
+                            }
+                          });
+                        },
                       ),
-                     // Image.asset('assets/images/mode.png'),
+                      // Image.asset('assets/images/mode.png'),
                       //  Icon(Icons.brightness_high),
                     ],
                   ),
@@ -158,10 +177,28 @@ class _SearchCountryState extends State<SearchCountry> {
                     ),
                   ),
                   SizedBox(height: 16),
+                  //test
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset('assets/images/english.png'),
+                      Container(
+                        padding: EdgeInsets.all(7),
+                        width: 83,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Color.fromRGBO(169, 184, 212, 1),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.language),
+                            SizedBox(width: 3),
+                            Text('EN'),
+                          ],
+                        ),
+                      ),
                       InkWell(
                         onTap: () async {
                           List<String> regions = await showModalBottomSheet(
@@ -174,11 +211,48 @@ class _SearchCountryState extends State<SearchCountry> {
                             sortedCountriesList(regions);
                           }
                         },
-                        child: Image.asset('assets/images/filter.png'),
+                        child: Container(
+                          padding: EdgeInsets.all(7),
+                          width: 83,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Color.fromRGBO(169, 184, 212, 1),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.filter_alt_outlined),
+                              SizedBox(width: 3),
+                              Text('Filter'),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 47),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Image.asset('assets/images/english.png'),
+                  //     InkWell(
+                  //       onTap: () async {
+                  //         List<String> regions = await showModalBottomSheet(
+                  //           context: context,
+                  //           builder: (context) => Filter(),
+                  //         );
+                  //
+                  //         if (regions.isEmpty) {
+                  //         } else {
+                  //           sortedCountriesList(regions);
+                  //         }
+                  //       },
+                  //       child: Image.asset('assets/images/filter.png'),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(height: 37),
                   SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: loading
@@ -202,4 +276,27 @@ class _SearchCountryState extends State<SearchCountry> {
       },
     );
   }
+
+  showDialogBox() => showCupertinoDialog<String>(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: Text('No connection'),
+          content: Text('Please check your internet connectivity'),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: Text('Ok'),
+            )
+          ],
+        ),
+      );
 }

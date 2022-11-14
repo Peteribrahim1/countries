@@ -32,7 +32,7 @@ class CountryWidget extends StatelessWidget {
       ),
       title: Text(
         '${country['name']['common']}',
-        style: Styles.leadingTextStyle,
+        //style: Styles.leadingTextStyle,
       ),
       subtitle: Text(
         '${country['capital'].toString().replaceAll('[', '').replaceAll(']', '')}',

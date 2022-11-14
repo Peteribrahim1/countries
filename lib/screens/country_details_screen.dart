@@ -43,7 +43,7 @@ class _CountryDetailsState extends State<CountryDetails> {
               ),
               title: Text(
                 '${widget.country['name']['common']}',
-                style: Styles.titleTextStyle,
+                style: Styles.appbartitleTextStyle,
               ),
               centerTitle: true,
            //   backgroundColor: Colors.white,
@@ -239,7 +239,7 @@ class _CountryDetailsState extends State<CountryDetails> {
                           style: Styles.postTextStyle),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 80),
                 ],
               ),
             ),

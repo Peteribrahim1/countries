@@ -9,7 +9,7 @@ class Filter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     // color: Color(0xff757575),
+      // color: Color(0xff757575),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.30,
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 25),
@@ -18,7 +18,7 @@ class Filter extends StatelessWidget {
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-         // color: Colors.white,
+          // color: Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,10 @@ class Filter extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Filter', style: Styles.titleTextStyle,),
+                Text(
+                  'Filter',
+                  style: Styles.titleTextStyle,
+                ),
                 InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
@@ -36,7 +39,7 @@ class Filter extends StatelessWidget {
             ),
             SizedBox(height: 24),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 List<String> regions = await showModalBottomSheet(
                   context: context,
                   builder: (context) => Continent(),
@@ -47,7 +50,10 @@ class Filter extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Continent', style: Styles.modalTextStyle,),
+                  Text(
+                    'Continent',
+                    style: Styles.modalTextStyle,
+                  ),
                   Icon(Icons.expand_more),
                 ],
               ),
@@ -56,7 +62,10 @@ class Filter extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Time Zone', style: Styles.modalTextStyle,),
+                Text(
+                  'Time Zone',
+                  style: Styles.modalTextStyle,
+                ),
                 Icon(Icons.expand_more),
               ],
             ),

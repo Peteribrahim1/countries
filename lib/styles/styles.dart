@@ -17,19 +17,26 @@ class Styles {
 
   static final preTextStyle = TextStyle(
     //  fontFamily: 'SofiaPro',
-    color: Color.fromRGBO(28, 25, 23, 1),
+   // color: Color.fromRGBO(28, 25, 23, 1),
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
   static final postTextStyle = TextStyle(
     //  fontFamily: 'SofiaPro',
-    color: Color.fromRGBO(28, 25, 23, 1),
+   // color: Color.fromRGBO(28, 25, 23, 1),
     fontSize: 16,
     fontWeight: FontWeight.w300,
   );
 
   static final titleTextStyle = TextStyle(
+    //  fontFamily: 'SofiaPro',
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+   // color: Color.fromRGBO(28, 25, 23, 1),
+  );
+
+  static final appbartitleTextStyle = TextStyle(
     //  fontFamily: 'SofiaPro',
     fontSize: 20,
     fontWeight: FontWeight.w700,
@@ -40,14 +47,14 @@ class Styles {
     //  fontFamily: 'SofiaPro',
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    color: Color.fromRGBO(28, 25, 23, 1),
+   // color: Color.fromRGBO(28, 25, 23, 1),
   );
 
   static final modalTextStyle = TextStyle(
     //  fontFamily: 'SofiaPro',
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: Color.fromRGBO(28, 25, 23, 1),
+   // color: Color.fromRGBO(28, 25, 23, 1),
   );
 
   static final fadedmodalTextStyle = TextStyle(

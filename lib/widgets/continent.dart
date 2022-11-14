@@ -26,19 +26,10 @@ class _ContinentState extends State<Continent> {
 
   List<String> selectedContinents = [];
 
-  void handlecheckbox(bool? value) {
-    if (value != null) {
-      setState(() {
-        checkBoxValue = value;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeModel>();
     return Container(
-    //  color: Color(0xff757575),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 25),
         decoration: BoxDecoration(
@@ -114,36 +105,36 @@ class _ContinentState extends State<Continent> {
               ),
             ),
             SizedBox(height: 24),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Time Zone',
+            //       style: Styles.smallHeadingTextStyle,
+            //     ),
+            //     Icon(Icons.expand_more),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 24,
+            // ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'Time Zone',
-                  style: Styles.smallHeadingTextStyle,
-                ),
-                Icon(Icons.expand_more),
-              ],
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 90,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Reset',
-                      style: Styles.modalTextStyle,
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: 90,
+                //   height: 48,
+                //   child: ElevatedButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       'Reset',
+                //       style: Styles.modalTextStyle,
+                //     ),
+                //     style: OutlinedButton.styleFrom(
+                //       backgroundColor: Colors.white,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   width: 200,
                   height: 48,
