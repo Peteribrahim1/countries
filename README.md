@@ -25,7 +25,7 @@ After launching the app the first screen that comes up is the screen that displa
    I made use of these package to check for network connection related problems on the app.   
 
 ## CHALLENGES FACED AND HOW I OVERCAME
-   I had challenge with sorting data from the API but i used stackoverflow and google to get solutions that helped me solve the problem. I also discovered that the API    some mssing data like some continents have no data while others have.
+   I had challenge with sorting data from the API but i used stackoverflow and google to get solutions that helped me solve the problem. I also discovered that the API    has some mssing data like some continents have no data while others have, and some few other missing data.
    
 ## FEATURES I WOULD LOVE TO ADD IF I HAD MORE TIME
    Automatic language detector.   
