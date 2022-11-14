@@ -9,23 +9,23 @@ The code base is structured to have a total of 6 folders which I used to structu
 After launching the app the first screen that comes up is the screen that displays the list of countries and their capital. If a user should tap on a country, it takes the user to the details screen that displays more information about a country. The app has a search bar that a user can use to search for a country and it comes up immediately. The app also has a filter option from the main screen that when tapped will pop up a modal bottom sheet that leads a user to the filtering by region(continent) option. At this point the user should select the continents he/she wants to view and press show result and the app filters the list to those regions. The app is intuitive and user friendly and also has a dark mode option to suite different users preference.
 
 ## DESCRIPTION OF LIBRARIES USED
-1. ### switcher_button
-   I made use of the switcher button to implement the switching of my dark and light them mode.
-
-2. ### Provider
+1. ### Provider
    I made use of the provider state management tool in the implementation of my dark/light mode.
 
-3. ### shared_preferences
+2. ### shared_preferences
    Shared_preferences was part of what i needed for the implentation of the light/dark mode.
    
-4. ### http
+3. ### http
    I made use of the http package to enable me make network calls to the API.
 
-5. ### card_swiper & page_transition
+4. ### card_swiper & page_transition
    I made use of card_swiper & page_transition to transit between different images in my details screen to switch between flags and coat of arms of each countery.
    
+5. ### Internet connection checker & connectivity plus
+   I made use of these package to check for network connection related problems on the app.   
+
 ## CHALLENGES FACED AND HOW I OVERCAME
-   I had challenge with sorting data from the API but i used stackoverflow and google to get solutions that helped me solve the problem.
+   I had challenge with sorting data from the API but i used stackoverflow and google to get solutions that helped me solve the problem. I also discovered that the API    has some mssing data like some continents have no data while others have, and some few other missing data.
    
 ## FEATURES I WOULD LOVE TO ADD IF I HAD MORE TIME
    Automatic language detector.   
