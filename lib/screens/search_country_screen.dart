@@ -1,17 +1,12 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:countries/api/api_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:switcher_button/switcher_button.dart';
 import '../models/countries_model.dart';
-
-//import '../models/country_model.dart';
 import 'package:countries/widgets/themeModel.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/country_widget.dart';
 import '../widgets/filter.dart';
 
@@ -125,8 +120,6 @@ class _SearchCountryState extends State<SearchCountry> {
                           });
                         },
                       ),
-                      // Image.asset('assets/images/mode.png'),
-                      //  Icon(Icons.brightness_high),
                     ],
                   ),
                   SizedBox(height: 24),
@@ -232,26 +225,6 @@ class _SearchCountryState extends State<SearchCountry> {
                       ),
                     ],
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Image.asset('assets/images/english.png'),
-                  //     InkWell(
-                  //       onTap: () async {
-                  //         List<String> regions = await showModalBottomSheet(
-                  //           context: context,
-                  //           builder: (context) => Filter(),
-                  //         );
-                  //
-                  //         if (regions.isEmpty) {
-                  //         } else {
-                  //           sortedCountriesList(regions);
-                  //         }
-                  //       },
-                  //       child: Image.asset('assets/images/filter.png'),
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(height: 37),
                   SizedBox(
                     height: MediaQuery.of(context).size.height,

@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../styles/styles.dart';
 import '../widgets/image_widget.dart';
 import '../widgets/themeModel.dart';
